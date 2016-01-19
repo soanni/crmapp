@@ -6,6 +6,11 @@ return [
     'components' => [
         'request' => [
             'cookieValidationKey' => 'mySecretKey'
-        ]
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false
+        ],
+        'db' => require(__DIR__ . '/db.php')
     ]
 ];
