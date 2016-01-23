@@ -13,7 +13,7 @@ class CustomerRecord extends ActiveRecord{
             ['id','number'],
             ['name','required'],
             ['name','string','max'=>256],
-            ['birth_date','date','format'=>'Y-m-d'],
+            ['birth_date','date','format'=>'php:Y-m-d'],
             ['notes','safe']
         ];
     }

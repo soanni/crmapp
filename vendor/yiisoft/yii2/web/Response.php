@@ -318,7 +318,7 @@ class Response extends \yii\base\Response
     /**
      * Clears the headers, cookies, content, status code of the response.
      */
-    public function clear()
+    public function clear()// TODO: Implement format() method.
     {
         $this->_headers = null;
         $this->_cookies = null;
