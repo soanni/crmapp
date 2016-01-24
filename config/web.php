@@ -3,6 +3,7 @@
 return [
     'id' => 'crmapp',
     'basePath' => realpath(__DIR__ . '/../'),
+    'bootstrap' => ['debug'],
     'components' => [
         'request' => [
             'cookieValidationKey' => 'mySecretKey'
@@ -42,6 +43,21 @@ return [
         'gii' => [
             'class' => 'yii\gii\Module',
             'allowedIPs' => ['*']
+        ],
+        'firstLevel' => [
+            'class' => 'app\utilities\FirstModule',
+            'modules' => [
+                'secondLevel' => [
+                    'class' => 'app\utilities\SecondModule'
+                ]
+            ]
+        ],
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            'allowedIPs' => ['*']
+        ],
+        'api'=> [
+            'class' => 'app\api\ApiModule'
         ]
     ],
     'extensions' => require(__DIR__ . '/../vendor/yiisoft/extensions.php')
