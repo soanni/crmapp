@@ -29,7 +29,14 @@ return [
                     'class' => 'app\utilities\YamlResponseFormatter'
                 ]
             ]
-        ]
+        ],
+        'user' => [
+            'identityClass' => 'app\models\user\UserRecord'
+        ],
+        'authManager' => [
+            'class' => \yii\rbac\DbManager::className(),
+            'defaultRoles' => ['guest']
+        ],
     ],
     'modules' => [
         'gii' => [

@@ -2,20 +2,18 @@
 
 namespace app\controllers;
 
-use app\utilities\YamlResponseFormatter;
 use Yii;
-use app\models\service\ServiceRecord;
-use app\models\service\ServiceSearchModel;
+use app\models\user\UserRecord;
+use app\models\user\UserSearchModel;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
 
 /**
- * ServicesController implements the CRUD actions for ServiceRecord model.
+ * UsersController implements the CRUD actions for UserRecord model.
  */
-class ServicesController extends Controller
+class UsersController extends Controller
 {
     public function behaviors()
     {
@@ -30,7 +28,7 @@ class ServicesController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'roles' => ['manager'],
+                        'roles' => ['admin'],
                         'allow' => true
                     ]
                 ]
@@ -39,12 +37,12 @@ class ServicesController extends Controller
     }
 
     /**
-     * Lists all ServiceRecord models.
+     * Lists all UserRecord models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ServiceSearchModel();
+        $searchModel = new UserSearchModel();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -54,7 +52,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Displays a single ServiceRecord model.
+     * Displays a single UserRecord model.
      * @param integer $id
      * @return mixed
      */
@@ -66,13 +64,13 @@ class ServicesController extends Controller
     }
 
     /**
-     * Creates a new ServiceRecord model.
+     * Creates a new UserRecord model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ServiceRecord();
+        $model = new UserRecord();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -84,7 +82,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Updates an existing ServiceRecord model.
+     * Updates an existing UserRecord model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,7 +101,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Deletes an existing ServiceRecord model.
+     * Deletes an existing UserRecord model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -115,35 +113,16 @@ class ServicesController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionJson(){
-        $models = ServiceRecord::find()->all();
-        $data = array_map(function($model){return $model->attributes;},$models);
-        $response = Yii::$app->response;
-        $response->format = Response::FORMAT_JSON;
-        $response->data = $data;
-        return $response;
-    }
-
-    public function actionYaml(){
-        $models = ServiceRecord::find()->all();
-        $data = array_map(function($model){return $model->attributes;},$models);
-        $response = Yii::$app->response;
-        $response->format = YamlResponseFormatter::FORMAT;
-        $response->data = $data;
-        return $response;
-
-    }
-
     /**
-     * Finds the ServiceRecord model based on its primary key value.
+     * Finds the UserRecord model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ServiceRecord the loaded model
+     * @return UserRecord the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ServiceRecord::findOne($id)) !== null) {
+        if (($model = UserRecord::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

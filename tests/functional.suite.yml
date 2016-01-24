@@ -6,6 +6,10 @@
 
 class_name: FunctionalTester
 modules:
-    enabled:
-        # add framework module here
-        - \Helper\Functional
+    enabled: [Db,Filesystem,\Helper\Functional]
+    config:
+      Db:
+        dsn: 'mysql:host=localhost;dbname=crmapp'
+        user: 'root'
+        password: 'jd5xugLMrr'
+        dump: tests/_data/dump.sql
